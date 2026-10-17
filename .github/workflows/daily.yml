@@ -2,7 +2,7 @@ name: ZVG Tagesupdate
 
 on:
   schedule:
-    - cron: "0 5 * * *"   # 05:00 UTC = 06:00/07:00 deutsche Zeit
+    - cron: "30 16 * * 1-5"   # Mo-Fr 16:30 UTC = 18:30 Sommer / 17:30 Winter
   workflow_dispatch:       # manueller Start per Knopf
 
 permissions:

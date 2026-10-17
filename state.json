@@ -2,26 +2,31 @@
  "168058": {
   "updated": "12-06-2026 11:24",
   "az": "0023 K 0049/2022",
-  "objekt": "Eigentumswohnung (ab 5 Zimmer): Rosental 102, Fritz-Schröder-Ufer 38, 53111 Bonn, Castell"
+  "objekt": "Eigentumswohnung (ab 5 Zimmer): Rosental 102, Fritz-Schröder-Ufer 38, 53111 Bonn, Castell",
+  "first_seen": "2026-10-17"
  },
  "168054": {
   "updated": "12-06-2026 09:58",
   "az": "0023 K 0009/2023",
-  "objekt": "Einfamilienhaus: Plittersdorfer Strasse 54, 53173 Bonn, Plittersdorf"
+  "objekt": "Einfamilienhaus: Plittersdorfer Strasse 54, 53173 Bonn, Plittersdorf",
+  "first_seen": "2026-10-17"
  },
  "168178": {
   "updated": "25-06-2026 10:51",
   "az": "0223 K 0008/2026",
-  "objekt": "Garage, Einfamilienhaus: Plittersdorfer Strasse 56, 53173 Bonn, Bad Godesberg-Villenviertel"
+  "objekt": "Garage, Einfamilienhaus: Plittersdorfer Strasse 56, 53173 Bonn, Bad Godesberg-Villenviertel",
+  "first_seen": "2026-10-17"
  },
  "168179": {
   "updated": "25-08-2026 10:17",
   "az": "0223 K 0009/2026",
-  "objekt": "Garage, Denkmalgeschütztes Wohnhaus: Plittersdorferstrase 52, 53173 Bonn, Bad Godesberg"
+  "objekt": "Garage, Denkmalgeschütztes Wohnhaus: Plittersdorferstrase 52, 53173 Bonn, Bad Godesberg",
+  "first_seen": "2026-10-17"
  },
  "168025": {
   "updated": "10-06-2026 10:59",
   "az": "0223 K 0038/2024",
-  "objekt": "unbebautes Grundstück, unbebautes Grundstück, Kfz-Stellplatz, Einfamilienhaus: Övericher Straße 28, 53343 Wachtberg, Fritzdorf"
+  "objekt": "unbebautes Grundstück, unbebautes Grundstück, Kfz-Stellplatz, Einfamilienhaus: Övericher Straße 28, 53343 Wachtberg, Fritzdorf",
+  "first_seen": "2026-10-17"
  }
 }

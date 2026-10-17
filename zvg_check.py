@@ -130,12 +130,15 @@ def load_state():
 
 def render(neu, geaendert, bestand, entfallen):
     def zeile(o, tag=""):
+        tage = o["seit"]
+        alter = "heute erstmals gelistet" if tage == 0 else f"seit {tage} {'Tag' if tage == 1 else 'Tagen'} gelistet"
         zi = f"{o['zimmer']:g} Zi." + (" (angenommen, Haus)" if o["zimmer_angenommen"] else "")
-        return (f"{tag}{o['objekt']}\n  {o['qm']:g} m² Wohnfläche, {zi}, Verkehrswert {o['wert']} €\n"
+        return (f"{tag}{o['objekt']}  ({alter})\n  {o['qm']:g} m² Wohnfläche, {zi}, Verkehrswert {o['wert']} €\n"
                 f"  Termin: {o['termin']}\n  Az. {o['az']} (AG {o['gericht']}), aktualisiert {o['updated']}\n"
                 f"  {o['beschreibung'][:300]}\n")
     teile = []
-    for titel, liste, tag in [("NEU", neu, ""), ("GEÄNDERT", geaendert, ""), ("Weiterhin im Verfahren", bestand, "")]:
+    for titel, liste, tag in [("NEU", neu, "[NEU] "), ("GEÄNDERT (seit der letzten Mail)", geaendert, "[GEÄNDERT] "),
+                              ("Weiterhin im Verfahren", bestand, "")]:
         if liste:
             teile.append(f"== {titel} ==\n" + "\n".join(zeile(o, tag) for o in liste))
     if entfallen:
@@ -169,6 +172,10 @@ def main():
             if o:
                 treffer[zvg_id] = o
     state = load_state()
+    heute = date.today()
+    for i, o in treffer.items():
+        erst = date.fromisoformat(state.get(i, {}).get("first_seen", heute.isoformat()))
+        o["first_seen"], o["seit"] = erst.isoformat(), (heute - erst).days
     neu = [o for i, o in treffer.items() if i not in state]
     geaendert = [o for i, o in treffer.items() if i in state and state[i]["updated"] != o["updated"]]
     bestand = [o for i, o in treffer.items() if i in state and state[i]["updated"] == o["updated"]]
@@ -181,7 +188,7 @@ def main():
         return
     send_mail(subject, body)
     STATE_FILE.write_text(json.dumps(
-        {i: {"updated": o["updated"], "az": o["az"], "objekt": o["objekt"]} for i, o in treffer.items()},
+        {i: {"updated": o["updated"], "az": o["az"], "objekt": o["objekt"], "first_seen": o["first_seen"]} for i, o in treffer.items()},
         indent=1, ensure_ascii=False))
 
 
