@@ -1,0 +1,30 @@
+name: ZVG Tagesupdate
+
+on:
+  schedule:
+    - cron: "0 5 * * *"   # 05:00 UTC = 06:00/07:00 deutsche Zeit
+  workflow_dispatch:       # manueller Start per Knopf
+
+permissions:
+  contents: write          # state.json zurueckcommitten
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Pruefen und Mail senden
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MAIL_TO: b.muellenmeister@gmail.com,michelle.busch@web.de
+        run: python zvg_check.py
+      - name: Zustand speichern
+        run: |
+          git config user.name "zvg-bot"
+          git config user.email "zvg-bot@users.noreply.github.com"
+          git add state.json
+          git diff --cached --quiet || (git commit -m "state update" && git push)
